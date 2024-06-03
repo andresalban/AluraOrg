@@ -4,25 +4,40 @@ import Header from './componentes/Header/Header';
 import Formulario from "./componentes/Formulario/Formulario";
 import MiOrg from "./componentes/MiOrg";
 import Equipo from "./componentes/Equipo/Equipo";
+import Footer from "./componentes/Footer/Footer";
 
 function App() {
+    //estados
     const [mostrarFomulario,actulizarMostrar]=useState(false)
+    const [colaboradores,actualizarColaboradores ]=useState([{
+        nombre: "Andres Alban",
+        puesto: "Instructor",
+        foto: "https://github.com/andresalban.png",
+        equipo: "Programación",
+    }])
+
     //ternario condicion ? seMuestas:NoSemuestra
     //condicion && seMuestra
     const cambiarMostrar = ()=>{
         actulizarMostrar(!mostrarFomulario)
 }
 
-//lista de equipos
+//registrar colaborador
+    const registrarColaborador = (colaborador) =>{
+        console.log("nuevo Colaborador",colaborador)
+        //spread operatior
+        actualizarColaboradores([...colaboradores,colaborador])
+    }
 
+//lista de equipos
     const equipos = [
         {
-            titulo:"Programacion",
+            titulo:"Programación",
             colorPrimario:"#57C278",
             colorSecundario:"#D9F7E9"
         },
         {
-            titulo:"Front End",
+            titulo:"Front-End",
             colorPrimario:"#82CFFA",
             colorSecundario:"#E8F8FF"
         },
@@ -59,17 +74,28 @@ function App() {
     return (
         <div>
             <Header/>
-            {/*{mostrarFomulario  ? <Formulario /> : <> </>}*/}
-            {mostrarFomulario && <Formulario equipos={equipos.map((equipo) => equipo.titulo)} />}
-            <MiOrg cambiarMostrar={cambiarMostrar}/>
+            {/*{mostrarFomulario  ? <Formulario /> : < > </>}*/}
             {
-                equipos.map( (equipo)=>
-                     <Equipo key={equipo.titulo} datos={equipo} />
-                )
+                mostrarFomulario && <Formulario
+                    equipos={equipos.map((equipo) => equipo.titulo)}
+                    registrarColaborador={registrarColaborador}
+                />
             }
 
+            <MiOrg cambiarMostrar={cambiarMostrar}/>
+            {
+                equipos.map( (equipo)=> <Equipo
+                    key={equipo.titulo}
+                    datos={equipo}
+                    colaboradores={colaboradores.filter(colaborador=>colaborador.equipo===equipo.titulo)}
+                />
+                )
+            }
+        <Footer/>
         </div>
     );
+
+
 }
 
 export default App;
