@@ -42,27 +42,7 @@ function App() {
         }
 
     ])
-
-    //ternario condicion ? seMuestas:NoSemuestra
-    //condicion && seMuestra
-    const cambiarMostrar = () => {
-        actulizarMostrar(!mostrarFomulario)
-    }
-
-//registrar colaborador
-    const registrarColaborador = (colaborador) => {
-        console.log("nuevo Colaborador", colaborador)
-        //spread operatior
-        actualizarColaboradores([...colaboradores, colaborador])
-    }
-//Eliminar Colaborador
-    const eliminarColaboraodor = () =>{
-        console.log("Eliminar colaborador");
-
-    }
-
-//lista de equipos
-    const equipos = [
+    const [equipos,actualizarEquipos]=useState( [
         {
             titulo: "Programación",
             colorPrimario: "#57C278",
@@ -101,7 +81,41 @@ function App() {
             colorSecundario: "#FFEEDF"
         },
 
-    ]
+    ])
+
+    //ternario condicion ? seMuestas:NoSemuestra
+    //condicion && seMuestra
+    const cambiarMostrar = () => {
+        actulizarMostrar(!mostrarFomulario)
+    }
+
+//registrar colaborador
+    const registrarColaborador = (colaborador) => {
+        console.log("nuevo Colaborador", colaborador)
+        //spread operatior
+        actualizarColaboradores([...colaboradores, colaborador])
+    }
+
+    //Eliminar Colaborador
+    const eliminarColaboraodor = () =>{
+        console.log("Eliminar colaborador");
+
+    }
+
+    //Actualizar color equipo
+    const actualizarColor = (color,titulo)=>{
+        console.log("Actualizar: ",color,titulo)
+        const equiposActulizados=equipos.map((equipo)=>{
+            if (equipo.titulo===titulo){
+                equipo.colorPrimario=color
+            }
+            return equipo
+        })
+        actualizarEquipos(equiposActulizados)
+    }
+
+//lista de equipos
+
 
     return (
         <div>
@@ -121,6 +135,8 @@ function App() {
                         datos={equipo}
                         colaboradores={colaboradores.filter(colaborador => colaborador.equipo === equipo.titulo)}
                         eliminarColaborador={eliminarColaboraodor}
+                        actualizarColor={actualizarColor}
+
                     />
                 )
             }

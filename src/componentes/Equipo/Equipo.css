@@ -1,13 +1,17 @@
 .equipo {
     width: 100%;
-
+    position: relative;
     padding: 32px;
     box-sizing: border-box;
     text-align: center;
     font-size: 32px;
-
-
 }
+.input-color{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
+
 
 .equipo h3 {
     display: inline-block;
