@@ -1,6 +1,6 @@
 import {useState} from "react";
 import './Formulario.css'
-import CampoTexto from "../CampoTexto";
+import CampoTexto from "../CampoTexto/CampoTexto";
 import ListaOpciones from "../ListaOpciones/ListaOpciones";
 import Boton from "../Boton/Boton";
 
